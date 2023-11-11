@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>kalkulator</title>
+  <link  rel= "apple-touch-icon"  size= "57x57"  href= "apple-icon-57x57.png" > 
+<link  rel= "apple-touch-icon"  size= "60x60"  href= "apple -icon-60x60.png" > 
+<link  rel= "apple-touch-icon"  size= "72x72"  href= "apple-icon-72x72.png" > 
+<link  rel= "apple-touch-icon"  size= "76x76"  href= "apple-icon-76x76.png" > 
+<link  rel= "apple-touch-icon"  size= "114x114"  href= "apple-icon-114x114.png" > 
+<link  rel= " apple-touch-icon"  size= "120x120"  href= "apple-icon-120x120.png" > 
+<link  rel= "apple-touch-icon"  size= "144x144"  href= "apple-icon-144x144. png" > 
+<link  rel= "apple-touch-icon"  size= "152x152"  href= "apple-icon-152x152.png" > 
+<link  rel= "apple-touch-icon"  size= "180x180"  href= "apple-icon-180x180.png" > 
+<link  rel= "icon"  type= "image/png"  size= "192x192"   href= "android-icon-192x192.png" > 
+<link  rel= "icon"  ketik= "gambar/png"  ukuran= "32x32"  href= "favicon-32x32.png" > 
+<link  rel= "icon"  type= "gambar/png"  ukuran= "96x96"  href= "favicon-96x96. png" > 
+<link  rel= "icon"  type= "image/png"  size= "16x16"  href= "favicon-16x16.png" > 
+<link  rel= "manifest"  href= "manifest.json" > 
+<meta  name= "msapplication-TileColor"  content= "#ffffff" > 
+<meta  name= "msapplication-TileImage"  content= "ms-icon-144x144.png" > 
+<meta  name= "theme-color"  isi= "#ffffff" >
+  <link rel="stylesheet" href="kalku.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+</head>
+
+<body>
+<div id="loading-overlay">
+<img src="looding.png" alt="looding" style="width: 50px" id="lg">
+ <p id="loading-text"><span class="bd">Calculator</span> by Abid is Loading<span id="loading-dots"></span></p>
+  </div>
+<div class="parent">
+  <section id="history">
+<textarea id="result" rows="5" readonly></textarea>
+           <button onclick="clearHistory()">Clear History</button>
+  </section>
+  <br>
+  <div class="container">
+    <section id="Display-area">
+      <div class="currentInput"></div>
+      <div class="answerScreen">0</div>
+    </section>
+    <section class="keypad-btns">
+      <button type="button" class="fun_btn" id="clear" value="">
+        AC
+      </button>
+      <button type="button" class="fun_btn" value="%">%</button>
+      <button type="button" class="fun_btn" value="/">÷</button>          
+      <button type="button" class="fun_btn" id="erase" value="">
+        &#11013;
+      </button>
+      <button type="button" class="num_btn" value="7">7</button>
+      <button type="button" class="num_btn" value="8">8</button>
+      <button type="button" class="num_btn" value="9">9</button>
+      <button type="button" class="fun_btn" value="*">x</button>
+      <button type="button" class="num_btn" value="4">4</button>
+      <button type="button" class="num_btn" value="5">5</button>
+      <button type="button" class="num_btn" value="6">6</button>
+      <button type="button" class="fun_btn" value="-">-</button>
+      <button type="button" class="num_btn" value="1">1</button>
+      <button type="button" class="num_btn" value="2">2</button>
+      <button type="button" class="num_btn" value="3">3</button>
+      <button type="button" class="fun_btn" value="+">+</button>
+      <button type="button" class="num_btn" value="00">00</button>
+      <button type="button" class="num_btn" value="0">0</button>
+      <button type="button" class="num_btn" value=".">.</button>
+      <button type="button" class="fun_btn" id="evaluate" value="">=</button>
+    </section>
+  </div>
+</div>
+  <script>function showFakeLoading() {
+  let loadingOverlay = document.getElementById('loading-overlay');
+  let loadingGmbr = document.getElementById('lg');
+  let loadingText = document.getElementById('loading-text');
+  let loadingDots = document.getElementById('loading-dots');
+  loadingOverlay.style.display = 'flex';
+  loadingText.style.display = 'block';
+  loadingGmbr.style.display = 'block';
+  loadingDots.style.display = 'inline'; // titik-titik
+  let dots = 1;
+  // Tambah titik-titik setiap detik
+  let dotsInterval = setInterval(() => {
+    loadingDots.innerHTML = '.'.repeat(dots);
+    dots = (dots % 3) + 1;
+  }, 1000);
+  // Sembunyikan kalkulator sementara
+  document.querySelector('.parent').style.visibility = 'hidden';
+  //  3 detik dan hapus overlay, tampilkan kalkulator, dan hentikan penambahan titik-titik
+  setTimeout(() => {
+    loadingOverlay.style.display = 'none';
+    document.querySelector('.parent').style.visibility = 'visible';
+    clearInterval(dotsInterval);
+  }, 3000);
+}
+
+showFakeLoading();
+  
+  
+  
+    let currentInput = document.querySelector('.currentInput');
+    let answerScreen = document.querySelector('.answerScreen');
+    let buttons = document.querySelectorAll('button');
+    let erasebtn = document.querySelector('#erase');
+    let clearbtn = document.querySelector('#clear');
+    let evaluate = document.querySelector('#evaluate');
+    let realTimeScreenValue = [];
+    // Inisialisasi variabel riwayat
+let history = [];
+let historyInput = document.getElementById('result');
+
+// Fungsi untuk Menilai dan Menyimpan Riwayat
+function evaluateAndStore() {
+  let expression = realTimeScreenValue.join('');
+  let result = eval(expression);
+  let historyEntry = `${expression} = ${result}`;
+  // Menambahkan riwayat ke awal textarea
+  history.unshift(historyEntry);
+  historyInput.value = history.join('\n \n');  
+  
+  clearCurrentInput();
+}
+
+// Fungsi untuk Menghapus Riwayat
+function clearHistory() {
+  history = [];
+  historyInput.value = '';
+}
+
+evaluate.addEventListener("click", () => {
+  evaluateAndStore();
+});
+
+    clearbtn.addEventListener("click", () => {
+      realTimeScreenValue = [''];
+      answerScreen.innerHTML = 0;
+      currentInput.className = 'currentInput'
+      answerScreen.className = 'answerScreen';
+      answerScreen.style.color = " rgba(150, 150, 150, 0.87)";
+      clearCurrentInput();
+      clearHistory();
+    })
+
+    buttons.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        // ketika tombol diklik bukan tombol yang terhapus 
+        if (!btn.id.match('erase')) {
+          // Untuk menampilkan nilai pada btn tekan
+          realTimeScreenValue.push(btn.value)
+          console.log(realTimeScreenValue)
+          currentInput.innerHTML = realTimeScreenValue.join('');
+
+          // Untuk mengevaluasi jawaban secara real time
+          if (btn.classList.contains('num_btn')) {
+            if ((eval(realTimeScreenValue.join(''))).toString().length > 8) {
+              answerScreen.innerHTML = (eval(realTimeScreenValue.join(''))).toFixed(5);
+            }
+
+            else {
+              console.log((eval(realTimeScreenValue.join(''))).toString().length)
+              answerScreen.innerHTML = eval(realTimeScreenValue.join(''));
+            }
+          }
+        }
+
+        // Saat tombol hapus diklik
+        if (btn.id.match('erase')) {
+          realTimeScreenValue.pop();
+          currentInput.innerHTML = realTimeScreenValue.join('');
+          answerScreen.innerHTML = eval(realTimeScreenValue.join(''));
+        }
+
+        // Saat tombol diklik adalah tombol evaluasi
+        if (btn.id.match('evaluate')) {
+          currentInput.className = 'answerScreen';
+          answerScreen.className = 'currentInput';
+          answerScreen.style.color = "white";
+        }
+
+        // Untuk mencegah kesalahan yang tidak terdefinisi di layar
+        if (typeof eval(realTimeScreenValue.join('')) == 'undefined') {
+          answerScreen.innerHTML = 0
+        }
+      })
+    })
+    
+    
+  </script>
+</body>
+</html>
