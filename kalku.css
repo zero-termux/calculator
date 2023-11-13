@@ -56,7 +56,7 @@
       overflow: hidden;
       position: absolute;
       right: 8px;
-      top: 0;
+      top: 8px;
     }
 
     #Display-area {
@@ -64,7 +64,7 @@
       margin: 2vh 0;
       display: grid;
       grid-template-columns: 100%;
-      grid-template-rows: repeat(2, minmax(40px, auto));
+      grid-template-rows: repeat(2, minmax(120px, auto));
       word-wrap: break-word;
       border-bottom: 3px rgba(128, 128, 128, 0.116) solid;
       position: relative;
@@ -74,16 +74,16 @@
     #Display-area .currentInput {
       /* display: flex; */
       text-align: right;
-      height: 8vh;
+      height: 15vh;
       color: white;
-      font-size: x-medium;
-      line-height: 2;
+      font-size: xxx-large;
       display: flex;
       flex-direction: row-reverse;
       flex-wrap: nowrap;
       word-wrap: break-word;
       overflow: hidden;
       font-weight: bold;
+      line-height: 2;
     }
 
     #Display-area .answerScreen {
@@ -91,12 +91,12 @@
       color: rgba(150, 150, 150, 0.87);
       height: 7px;
       line-height: -8;
-      font-size: small;
+      font-size: xx-large;
     }
 
     .keypad-btns {
       display: grid;
-      grid: repeat(5, 30px) / repeat(4, 40px);
+      grid: repeat(5, 65px) / repeat(4, 90px);
       grid-row-gap: 5px;
       grid-column-gap: 5px;
     }
@@ -107,7 +107,7 @@
       border-radius: 2px;
       background-color: #474b6b;
       color: #fff;
-      font-size: small;
+      font-size: large;
       font-weight: bold;
     }
 
@@ -129,9 +129,9 @@
     
     #history textarea {
       float: left;
-      height: 245px;
+      height: 580px;
       margin: 5px;
-      width: 180px;
+      width: 280px;
       border: 1px solid white;
        border-radius: 8px;
        background-color: #131313;
@@ -142,7 +142,7 @@
     #history button {
        position: absolute;
        width: 100px;
-       padding: 2px;
+       padding: 5px;
        border-radius: 3px;
        background-color: red;
        color: white;
@@ -152,13 +152,13 @@
      }
     
     .parent {
-      width: 400px;
+      width: 700px;
       margin: auto;
       position: relative;
       border-right: 3px solid white;
       border-left: 3px solid white;
       padding: 5px;
-      height: 300px;
+      height: 640px;
     }
     
     
@@ -182,7 +182,7 @@
        margin-right: 8px;
        margin-left: 8px;
        position: relative;
-       top: none;
+       top: 0;
        right: 0;
      }
       
