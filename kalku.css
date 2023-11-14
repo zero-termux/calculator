@@ -204,6 +204,7 @@
       #Display-area .currentInput {
         margin-bottom: 50px;
         font-size: xx-large;
+        line-height: 0;
       }
       
       #Display-area .answerScreen {
