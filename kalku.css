@@ -193,8 +193,8 @@
       
       .keypad-btns {
         grid: repeat(5, 60px) / repeat(4, 70px);
-        grid-row-gap: 10px;
-        grid-column-gap: 10px;
+        grid-row-gap: 8px;
+        grid-column-gap: 8px;
       }
       
       .keypad-btns button {
