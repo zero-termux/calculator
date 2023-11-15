@@ -188,7 +188,7 @@
       
       #Display-area {
         margin: 1.5vh 0;
-        grid-template-rows: repeat(2,      minmax(80px, auto));
+        grid-template-rows: repeat(2,      minmax(45px, auto));
       }
       
       .keypad-btns {
