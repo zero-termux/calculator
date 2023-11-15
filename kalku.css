@@ -188,6 +188,7 @@
       
       #Display-area {
         margin: 1.5vh 0;
+        grid-template-rows: repeat(2,      minmax(80px, auto));
       }
       
       .keypad-btns {
@@ -203,6 +204,7 @@
       
       #Display-area .currentInput {
         font-size: xx-large;
+        line-height: 3;
       }
       
       #Display-area .answerScreen {
