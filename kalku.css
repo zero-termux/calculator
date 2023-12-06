@@ -138,10 +138,6 @@
        color: white;
        padding: 10px;
     }
-
-    #history label {
-      display: none;
-    }
     
     #history button {
        position: absolute;
